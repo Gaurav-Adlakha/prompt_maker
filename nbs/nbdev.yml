@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "prompt_maker"
+  site-url: "https://Gaurav-Adlakha.github.io/prompt_maker"
+  description: "prompt maker to library using best practices."
+  repo-branch: main
+  repo-url: "https://github.com/Gaurav-Adlakha/prompt_maker"
