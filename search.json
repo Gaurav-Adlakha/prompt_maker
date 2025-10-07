@@ -1,0 +1,42 @@
+[
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "Core import for prompt maker",
+    "section": "",
+    "text": "Basic Imports\n\nfrom fastcore.all import L\n\n\nsource\n\nL\n\n L (items=None, *rest, use_list=False, match=None)\n\nBehaves like a list of items but can also index with list of indices or masks\n\nsource\n\n\nH1\n\n H1 (*c:fastcore.xml.FT|str, cls:enum.Enum|str|tuple=(), **kwargs)\n\nH1 with styling and appropriate size\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nc\nfastcore.xml.FT | str\n\nContents of H1 tag (often text)\n\n\ncls\nenum.Enum | str | tuple\n()\nClasses in addition to H1 styling\n\n\nkwargs\nVAR_KEYWORD\n\n\n\n\nReturns\nFT\n\nH1(…, cls=‘uk-h1’)\n\n\n\n\n\n\nInitializing app with live debug mode.\n\n\nBasic components and temp for import\n\nsource\n\napply_preset\n\n apply_preset (preset_type)\n\n\n\n\ncode\n\nsource\n\ngenerate_prompt_content\n\n generate_prompt_content (criteria, components, model='openai/gpt-4o')\n\n\nsource\n\n\nparse_llm_response\n\n parse_llm_response (content)\n\nindex page\n\nsource\n\n\nget\n\n get (preset:str='')\n\n\nsource\n\n\nget_progress\n\n get_progress (session_id:str)\n\n\nsource\n\n\ngenerate\n\n generate (request)\n\n\n@rt(\"/generate\", methods=[\"POST\"])\nasync def generate(request):\n    form_data = await request.form()\n    criteria,components,model = form_data.get(\"criteria\", \"\"),form_data.getlist(\"components\"),form_data.get(\"model\", \"gpt-3.5-turbo\")\n    role_text,task_text,format_text,examples_text = form_data.get(\"role_text\", \"\"),form_data.get(\"task_text\", \"\"),form_data.get(\"format_text\", \"\"),form_data.get(\"examples_text\", \"\")\n    if not criteria.strip(): return Div(\"Please enter some criteria first!\", cls='text-red-500')\n    session_id = str(uuid.uuid4())\n    progress_state[session_id] = {\"progress\": 10, \"done\": False}\n    form_json = json.dumps({\"criteria\": criteria, \"components\": components, \"model\": model, \"role_text\": role_text, \"task_text\": task_text, \"format_text\": format_text, \"examples_text\": examples_text, \"session_id\": session_id})\n    return Div(Progress(value=10, hx_get=f\"/progress/{session_id}\", hx_trigger=\"load, every 500ms\", hx_swap=\"outerHTML\"), Div(id=\"final-output\", hx_post=f\"/generate-result\", hx_trigger=\"load delay:100ms\", hx_vals=form_json))\n\n\nsource\n\n\ngenerate_result\n\n generate_result (request)\n\n\n\n\nimage.png",
+    "crumbs": [
+      "Core import for prompt maker"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "prompt_maker",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "prompt_maker"
+    ]
+  },
+  {
+    "objectID": "index.html#developer-guide",
+    "href": "index.html#developer-guide",
+    "title": "prompt_maker",
+    "section": "Developer Guide",
+    "text": "Developer Guide\nIf you are new to using nbdev here are some useful pointers to get you started.\n\nInstall prompt_maker in Development mode\n# make sure prompt_maker package is installed in development mode\n$ pip install -e .\n\n# make changes under nbs/ directory\n# ...\n\n# compile to have changes apply to prompt_maker\n$ nbdev_prepare",
+    "crumbs": [
+      "prompt_maker"
+    ]
+  },
+  {
+    "objectID": "index.html#usage",
+    "href": "index.html#usage",
+    "title": "prompt_maker",
+    "section": "Usage",
+    "text": "Usage\n\nInstallation\nInstall latest from the GitHub repository:\n$ pip install git+https://github.com/Gaurav-Adlakha/prompt_maker.git\nor from conda\n$ conda install -c Gaurav-Adlakha prompt_maker\nor from pypi\n$ pip install prompt_maker\n\n\nDocumentation\nDocumentation can be found hosted on this GitHub repository’s pages. Additionally you can find package manager specific guidelines on conda and pypi respectively.",
+    "crumbs": [
+      "prompt_maker"
+    ]
+  }
+]
