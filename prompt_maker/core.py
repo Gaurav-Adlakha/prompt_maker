@@ -98,7 +98,7 @@ async def generate(request):
     return Div(Progress(value=10, hx_get=f"/progress/{session_id}", hx_trigger="load, every 500ms", hx_swap="outerHTML"), Div(id="final-output", hx_post=f"/generate-result", hx_trigger="load delay:100ms", hx_vals=form_json))
 
 
-# %% ../nbs/00_core.ipynb 19
+# %% ../nbs/00_core.ipynb 20
 @rt("/generate-result", methods=["POST"])
 async def generate_result(request):
     data = await request.form()
@@ -121,5 +121,5 @@ async def generate_result(request):
     progress_state[session_id] = {"progress": 100, "done": True}
     return Div(DivFullySpaced(P(f"Model: {model}", cls='font-bold'), Button("Copy", onclick="navigator.clipboard.writeText(document.getElementById('prompt-text').textContent); alert('Copied!');", cls=ButtonT.ghost)), Pre(final_prompt, id="prompt-text", cls='border p-4 rounded bg-gray-50 text-sm whitespace-pre-wrap mt-2'))
 
-# %% ../nbs/00_core.ipynb 20
+# %% ../nbs/00_core.ipynb 21
 serve()
